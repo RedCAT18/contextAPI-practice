@@ -1,5 +1,6 @@
 import React from 'react';
-import { useCounterContext } from '../contexts/CounterContext';
+// import { useCounterContext } from '../contexts/CounterContext';
+import { useCounter } from '../contexts/CounterContext';
 
 const Counter = ({ number, increment, initialise }) => {
   return (
@@ -17,4 +18,11 @@ const Counter = ({ number, increment, initialise }) => {
   );
 };
 
-export default useCounterContext(Counter);
+// export default useCounterContext(Counter);
+
+//use Hoc Creator function
+export default useCounter(({ state, actions }) => ({
+  number: state.number,
+  increment: actions.increment,
+  initialise: actions.initialise
+}))(Counter);

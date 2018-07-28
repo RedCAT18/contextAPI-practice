@@ -1,4 +1,5 @@
 import React, { Component, createContext } from 'react';
+import createUseConsumer from '../lib/createUseConsumer';
 
 const Context = createContext();
 
@@ -25,20 +26,24 @@ class CounterProvider extends Component {
   }
 }
 
-function useCounterContext(WrappedComponent) {
-  return function useCounter(props) {
-    return (
-      <CounterConsumer>
-        {({ state, actions }) => (
-          <WrappedComponent
-            number={state.number}
-            increment={actions.increment}
-            initialise={actions.initialise}
-          />
-        )}
-      </CounterConsumer>
-    );
-  };
-}
+// function useCounterContext(WrappedComponent) {
+//   return function useCounter(props) {
+//     return (
+//       <CounterConsumer>
+//         {({ state, actions }) => (
+//           <WrappedComponent
+//             number={state.number}
+//             increment={actions.increment}
+//             initialise={actions.initialise}
+//           />
+//         )}
+//       </CounterConsumer>
+//     );
+//   };
+// }
 
-export { CounterProvider, CounterConsumer, useCounterContext };
+//use HoC creator function
+const useCounter = createUseConsumer(CounterConsumer);
+
+// export { CounterProvider, CounterConsumer, useCounterContext };
+export { CounterProvider, CounterConsumer, useCounter };
