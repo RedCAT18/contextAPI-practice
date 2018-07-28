@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { InputConsumer } from '../contexts/inputContext';
+// import { InputConsumer } from '../contexts/inputContext';
+import { useInputContext } from '../contexts/inputContext';
 
 class Sends extends Component {
   state = {
@@ -40,15 +41,18 @@ class Sends extends Component {
 }
 
 //create another component which use consumer (because method uses actions)
-const SendsContainer = () => {
-  return (
-    <InputConsumer>
-      {({ state, actions }) => (
-        <Sends value={state.value} setValue={actions.setValue} />
-      )}
-    </InputConsumer>
-  );
-};
+// const SendsContainer = () => {
+//   return (
+//     <InputConsumer>
+//       {({ state, actions }) => (
+//         <Sends value={state.value} setValue={actions.setValue} />
+//       )}
+//     </InputConsumer>
+//   );
+// };
 
 //export SendsContainer instead of Sends
-export default SendsContainer;
+// export default SendsContainer;
+
+//use HoC
+export default useInputContext(Sends);

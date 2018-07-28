@@ -33,5 +33,18 @@ class InputProvider extends Component {
   }
 }
 
+//create HoC(parameter: component) - create Component with comsumer
+function useInputContext(WrappedComponent) {
+  return function UseInputContext(props) {
+    return (
+      <InputConsumer>
+        {({ state, actions }) => (
+          <WrappedComponent value={state.value} setValue={actions.setValue} />
+        )}
+      </InputConsumer>
+    );
+  };
+}
+
 //Set prefix to avoid conflits between several contexts.
-export { InputProvider, InputConsumer };
+export { InputProvider, InputConsumer, useInputContext };
